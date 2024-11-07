@@ -7,13 +7,11 @@ class Validate():
     #function to validate email address
     def validate_email(self,email):
         pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
-        print("Email regex",re.match(pattern, email),re.match(pattern, email) is not None)
         return re.match(pattern, email) is not None
 
     def validate_phone(self, phone):
         #pattern for US phone numbers
         pattern = re.compile(r'^(\+1|1)?\s*\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$')
-        print("Phone regex",re.match(pattern, phone),re.match(pattern, phone) is not None)
         return re.match(pattern, phone) is not None
     
     def validate_payload(self, data):
@@ -29,7 +27,6 @@ class Validate():
         validation = self.validate_recipient(data)
         if validation != True:
             return validation
-        # print(3)
         return validation
 
     def validate_type(self,data):
