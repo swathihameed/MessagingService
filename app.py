@@ -25,17 +25,16 @@ def send_message():
     if data.get("type") == "SMS":
         #send sms message
         pass
-        # response
     
-    #code to store to db
-    timestamp = datetime.now()
-    status_code = 200 #message send status
-    msg_id = 123
+        #code to store to db
+        timestamp = datetime.now()
+        status_code = 200 #response.status_code
+        msg_id = 123
 
-    query = f'''INSERT INTO message_status(status , timestamp) VALUES (%s ,%s)'''
-    DATA = [status_code, timestamp] 
-    db_connection(query,DATA)
-    print("stored to db")
+        query = f'''INSERT INTO message_status(status , timestamp) VALUES (%s ,%s)'''
+        DATA = [status_code, timestamp] 
+        db_connection(query,DATA)
+        print("stored to db")
 
     return data
 
