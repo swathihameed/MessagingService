@@ -10,6 +10,10 @@ app = Flask(__name__)
 validate = Validate()
 message = Message()
 
+def configure():
+    configure_db("sqlite")
+    #configure env vars
+
 @app.route('/sendMessage', methods=['POST'])
 def send_message():
     data = request.get_json()
@@ -27,4 +31,5 @@ def send_message():
 
 
 if __name__ == '__main__':
+    configure()
     app.run(debug=True,port=5000)
