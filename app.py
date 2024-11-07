@@ -3,15 +3,10 @@ from flask import Flask, jsonify, request
 from helpers.validate import Validate
 from helpers.storage import * 
 from datetime import datetime
-import psycopg2
-from dotenv import load_dotenv
-import os 
 
 
 app = Flask(__name__)
 validate = Validate()
-
-load_dotenv()
 
 @app.route('/sendMessage', methods=['POST'])
 def send_message():
