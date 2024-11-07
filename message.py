@@ -20,4 +20,16 @@ class Message():
             self.send_sms(recipient, content)
         elif type == "Email":
             self.send_email(recipient, content)
+        
+            timestamp = datetime.now()
+            status_code = 200 #message send status
+            msg_id = 123
+
+            query = f'''INSERT INTO message_status(status , timestamp) VALUES (?,?)'''
+            DATA = [status_code, timestamp]
+            sqlite_connection(query, DATA)
+            query = ''' INSERT INTO messages(type, recipient, message_content, status_code) VALUES (?, ?, ?, ?)'''
+            DATA = [data.get("type"), data.get("recipient"), data.get("content"),status_code] 
+            sqlite_connection(query,DATA)
+            print("stored to db")
         return True
