@@ -24,16 +24,19 @@ def send_message():
     # function to send_message()
     if data.get("type") == "SMS":
         #send sms message
-        pass
+        # pass
     
         #code to store to db
         timestamp = datetime.now()
         status_code = 200 #response.status_code
         msg_id = 123
 
-        query = f'''INSERT INTO message_status(status , timestamp) VALUES (%s ,%s)'''
+        query = '''INSERT INTO message_status(status , timestamp) VALUES (?, ?)'''
         DATA = [status_code, timestamp] 
-        db_connection(query,DATA)
+        sqlite_connection(query,DATA)
+        query = ''' INSERT INTO messages(type, recipient, message_content, status_code) VALUES (?, ?, ?, ?)'''
+        DATA = [data.get("type"), data.get("recipient"), data.get("content"),status_code] 
+        sqlite_connection(query,DATA)
         print("stored to db")
 
     return data
