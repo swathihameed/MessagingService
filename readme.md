@@ -16,7 +16,7 @@ A simple messaging service API built using Flask that supports sending and valid
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/messagingservice.git
+   git clone https://github.com/swathihameed/MessagingService.git
    cd messagingservice
    ```
 
