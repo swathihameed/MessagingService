@@ -49,7 +49,7 @@ jobs:
           python -c "import sys; print('\n'.join(sys.path))"
 
       - name: Print working directory
-          run: pwd
+        run: pwd
 
       - name: Run tests
         run: pytest tests/
@@ -76,7 +76,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./DockerFile
+          file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/messagingservice:latest
 
