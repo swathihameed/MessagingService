@@ -7,14 +7,12 @@ load_dotenv()
 
 def configure_db(db):
     if db == "sqlite":
-        configure_sqlite_db()
+        db_file_path = os.getenv("sqlite_db_file")
+        configure_sqlite_db(db_file_path)
     elif db == "psql":
         configure_psql_db()
 
-def configure_sqlite_db():
-    db = "sqlite"
-    db_file_path = os.getenv("sqlite_db_file")
-
+def configure_sqlite_db(db_file_path):
     conn = sqlite3.connect(db_file_path)
     # Create a cursor object using the cursor() method
     cursor = conn.cursor()
@@ -29,9 +27,9 @@ def configure_sqlite_db():
                     timestamp INTEGER)'''
                 )
     cursor.execute('''CREATE TABLE IF NOT EXISTS message_status 
-                    (msg_id integer PRIMARY KEY ASC,
-                    status  text ,
-                    timestamp integer )'''
+                    (msg_id INTEGER PRIMARY KEY ASC,
+                    status  TEXT ,
+                    timestamp INTEGER )'''
                                  ) 
 
     # Save the changes and close connection
@@ -76,10 +74,16 @@ def psql_connection(QUERY,DATA):
     cur.close() 
     conn.close() 
 
-def sqlite_connection(QUERY,DATA):
-    db_file_path = os.getenv("sqlite_db_file")
+def sqlite_connection(db_file_path,QUERY,DATA):
+    # db_file_path = os.getenv("sqlite_db_file")
     conn = sqlite3.connect(db_file_path)
     cursor = conn.cursor()
     cursor.execute(QUERY, DATA)
     conn.commit()
     conn.close()
+
+def insert_data(db_file_path,table,columns, data):
+    val = ", ".join(["?" for c in columns])
+    col = ", ".join(columns)
+    query = f'''INSERT INTO {table}({col}) VALUES ({val})'''
+    sqlite_connection(db_file_path,query, data)

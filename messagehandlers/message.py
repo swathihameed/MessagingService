@@ -1,6 +1,9 @@
 from helpers.storage import *
 from datetime import datetime
 from flask import jsonify
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class Message():
 
@@ -26,8 +29,9 @@ class Message():
         status_code = response.status_code #message send status
 
         #store to db
-        insert_data('message_status', ['status' , 'timestamp'],[status_code , timestamp])
-        insert_data('messages', ['type', ' recipient', ' message_content', 'status_code'], 
+        db_path = os.getenv("sqlite_db_file")
+        insert_data(db_path,'message_status', ['status' , 'timestamp'],[status_code , timestamp])
+        insert_data(db_path,'messages', ['type', ' recipient', ' message_content', 'status_code'], 
                     [data.get("type"), data.get("recipient"), data.get("content"),status_code] )
         print("stored to db")
         return True
