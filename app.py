@@ -3,7 +3,7 @@ from flask import Flask, jsonify, request
 from helpers.validate import Validate
 from helpers.storage import * 
 from datetime import datetime
-from message import Message
+from messagehandlers.message import Message
 
 
 app = Flask(__name__)
