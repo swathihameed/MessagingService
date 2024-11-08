@@ -12,6 +12,10 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    env:
+      FLASK_ENV: development
+      PYTHONPATH: ${{ github.workspace }}/messagingservice
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -28,6 +32,11 @@ jobs:
 
       - name: Set environment variables
         run: echo "sqlite_db_file=db.sqlite3" >> $GITHUB_ENV
+
+      - name: Print environment variables
+        run: |
+          echo "FLASK_ENV is $FLASK_ENV"
+          echo "PYTHONPATH is $PYTHONPATH"
 
       - name: Run tests
         run: pytest tests/
