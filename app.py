@@ -1,4 +1,3 @@
-import json
 from flask import Flask, jsonify, request
 from helpers.validate import Validate
 from helpers.storage import * 
@@ -27,6 +26,16 @@ def send_message():
     
     return jsonify(data)
 
+@app.route('/viewData', methods=['GET'])
+def view_data():
+    db_path = os.getenv("sqlite_db_file")
+    messages = get_all_data(db_path,'messages')
+    message_status = get_all_data(db_path,'message_status')
+    # Return both tables' data in JSON format
+    return jsonify({
+        "messages": messages,
+        "message_status": message_status
+    })
 
 if __name__ == '__main__':
     configure()

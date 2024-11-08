@@ -74,8 +74,10 @@ def psql_connection(QUERY,DATA):
     cur.close() 
     conn.close() 
 
-def sqlite_connection(db_file_path,QUERY,DATA):
-    # db_file_path = os.getenv("sqlite_db_file")
+def sqlite_connection(db_file_path,QUERY,DATA=None):
+    configure_sqlite_db(db_file_path)
+    if DATA is None:
+        DATA = ()
     conn = sqlite3.connect(db_file_path)
     cursor = conn.cursor()
     cursor.execute(QUERY, DATA)
@@ -87,3 +89,18 @@ def insert_data(db_file_path,table,columns, data):
     col = ", ".join(columns)
     query = f'''INSERT INTO {table}({col}) VALUES ({val})'''
     sqlite_connection(db_file_path,query, data)
+
+def get_all_data(db_file_path,table):
+    configure_sqlite_db(db_file_path)
+
+    query = f"SELECT * FROM {table}"
+
+    conn = sqlite3.connect(db_file_path)
+    cursor = conn.cursor()
+    cursor.execute(query)
+    data = cursor.fetchall()
+    conn.commit()
+    conn.close()
+
+    return data
+    
