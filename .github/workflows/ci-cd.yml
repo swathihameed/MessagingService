@@ -48,7 +48,7 @@ jobs:
         run: |
           python -c "import sys; print('\n'.join(sys.path))"
 
-      -- name: Print working directory
+      - name: Print working directory
           run: pwd
 
       - name: Run tests
