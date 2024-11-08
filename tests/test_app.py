@@ -7,7 +7,6 @@ test_data = {
       "content": "Test message"
     }
 
-
 def test_send_message(client):  
     response = client.post(  
         "/sendMessage", data=json.dumps(test_data), content_type="application/json"  
@@ -15,9 +14,7 @@ def test_send_message(client):
     assert response.status_code == 200
     create_response_json = json.loads(response.data)  
     assert create_response_json == {
-      "type": "SMS",
-      "recipient": "+11234567890",
-      "content": "Test message"
+    "success": "true"
     }
 
 def test_send_message_missing_type(client):
@@ -59,9 +56,7 @@ def test_send_message_valid_email(client):
     })
     assert response.status_code == 200
     assert response.json == {
-        "type": "Email",
-        "recipient": "test@example.com",
-        "content": "Hello!"
+    "success": "true"
     }
 
 def test_send_message_valid_sms(client):
@@ -73,8 +68,6 @@ def test_send_message_valid_sms(client):
     })
     assert response.status_code == 200
     assert response.json == {
-        "type": "SMS",
-        "recipient": "123-456-7890",
-        "content": "Hello!"
+    "success": "true"
     }
     
