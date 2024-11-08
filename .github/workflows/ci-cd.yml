@@ -14,7 +14,7 @@ jobs:
 
     env:
       FLASK_ENV: development
-      # PYTHONPATH: ${{ github.workspace }}/messagingservice
+      PYTHONPATH: ${{ github.workspace }}/MessagingService
 
     steps:
       - name: Checkout code
@@ -47,6 +47,9 @@ jobs:
       - name: Check Python path
         run: |
           python -c "import sys; print('\n'.join(sys.path))"
+
+      -- name: Print working directory
+          run: pwd
 
       - name: Run tests
         run: pytest tests/
