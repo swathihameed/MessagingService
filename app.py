@@ -30,7 +30,7 @@ def send_message():
 
     # Validation passed, send the message
     message.message_service(data)
-    return jsonify({"success": True})
+    return jsonify({"success": "true"})
 
 
 @app.route('/viewData', methods=['GET'])
