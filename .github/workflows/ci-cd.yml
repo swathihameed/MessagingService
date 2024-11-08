@@ -14,7 +14,7 @@ jobs:
 
     env:
       FLASK_ENV: development
-      PYTHONPATH: ${{ github.workspace }}/MessagingService
+      PYTHONPATH: ${{ github.workspace }}
 
     steps:
       - name: Checkout code
