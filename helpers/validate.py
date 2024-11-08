@@ -3,7 +3,7 @@ import re
 required_payload_params = ["type", "recipient", "content"]
 message_format = ["SMS", "Email"]
 
-class Validate():
+class Validate:
     #function to validate email address
     def validate_email(self,email):
         pattern = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
