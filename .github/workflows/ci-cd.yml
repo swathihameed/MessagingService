@@ -38,6 +38,12 @@ jobs:
           echo "FLASK_ENV is $FLASK_ENV"
           echo "PYTHONPATH is $PYTHONPATH"
 
+      - name: Print Python path
+        run: echo "PYTHONPATH is $PYTHONPATH"
+
+      - name: List all files
+        run: ls -R ${GITHUB_WORKSPACE}
+
       - name: Check Python path
         run: |
           python -c "import sys; print('\n'.join(sys.path))"
