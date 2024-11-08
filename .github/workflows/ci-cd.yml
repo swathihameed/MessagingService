@@ -59,13 +59,14 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image for multiple platforms
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/messagingservice:latest
+          platforms: linux/amd64,linux/arm64 # Build for both amd64 and arm64 architectures
 
       - name: Image digest
         run: echo ${{ steps.build-and-publish.outputs.digest }}
