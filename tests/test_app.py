@@ -3,7 +3,7 @@ import logging as logger
 
 test_data = {
       "type": "SMS",
-      "recipient": "+11234567890",
+      "recipient": "+18777804236",
       "content": "Test message"
     }
 
@@ -63,7 +63,7 @@ def test_send_message_valid_sms(client):
     # Test with valid SMS message payload
     response = client.post('/sendMessage', json={
         "type": "SMS",
-        "recipient": "123-456-7890",
+        "recipient": "18777804236",
         "content": "Hello!"
     })
     assert response.status_code == 200
