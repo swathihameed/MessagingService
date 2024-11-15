@@ -19,7 +19,7 @@ class Message:
         channel = self.channel_type.get_channel(message_type)
 
         # Send the message using the appropriate channel
-        response = channel.send_message(recipient, content)
+        response = channel.send_message(recipient=recipient, message_body = content)
 
         timestamp = datetime.now()
         status_code = response.status_code  # Message send status
